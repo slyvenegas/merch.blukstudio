@@ -24,7 +24,7 @@ export function Header({ isBackVisible, onBack }: HeaderProps) {
             src="images/bluk-logo-y.png"
             alt="Bluk* Logo-y"
             className="w-auto h-20 mb-2"
-            target="_blank"
+
           />
         </a>
         <MainMenu isBackVisible={isBackVisible} onBack={onBack} />
