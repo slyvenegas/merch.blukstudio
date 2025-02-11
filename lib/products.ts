@@ -63,7 +63,7 @@ export const products: Product[] = [
     id: 'sh-04a-white',
     name: 'T-SHIRT 04A',
     image:
-      '/images/T_SHIRT_4a.webp',
+      '/images/T_SHIRT_4A.webp',
   },
   {
     id: 'sh-05-white',
