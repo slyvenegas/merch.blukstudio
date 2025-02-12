@@ -9,37 +9,37 @@ export const products: Product[] = [
     id: 'sh-01-white',
     name: 'T-SHIRT 01',
     image:
-      '/images/T_SHIRT_1.webp',
+      '/images/T_SHIRT_1.jpg',
   },
   {
-    id: 'sh-01a-white',
-    name: 'T-SHIRT 01A',
+    id: 'sh-01-back-white',
+    name: 'T-SHIRT 01',
     image:
-      '/images/T_SHIRT_1A.webp',
+      '/images/T_SHIRT_1A.jpg',
   },
   {
     id: 'sh-02-white',
     name: 'T-SHIRT 02',
     image:
-      '/images/T_SHIRT_2.webp',
+      '/images/T_SHIRT_2.jpg',
   },
   {
-    id: 'sh-02a-white',
-    name: 'T-SHIRT 02A',
+    id: 'sh-02-back-white',
+    name: 'T-SHIRT 02',
     image:
-      '/images/T_SHIRT_2A.webp',
+      '/images/T_SHIRT_2A.jpg',
   },
   {
     id: 'sh-03-white',
     name: 'T-SHIRT 03',
     image:
-      '/images/T_SHIRT_3.webp',
+      '/images/T_SHIRT_3A.jpg',
   },
   {
-    id: 'sh-03a-white',
-    name: 'T-SHIRT 03A',
+    id: 'sh-03-back-white',
+    name: 'T-SHIRT 03',
     image:
-      '/images/T_SHIRT_3A.webp',
+      '/images/T_SHIRT_3.jpg',
   },
   // {
   //   id: 'hd-01-black',
@@ -57,26 +57,26 @@ export const products: Product[] = [
     id: 'sh-04-white',
     name: 'T-SHIRT 04',
     image:
-      '/images/T_SHIRT_4.webp',
+      '/images/T_SHIRT_4A.jpg',
   },
   {
-    id: 'sh-04a-white',
-    name: 'T-SHIRT 04A',
+    id: 'sh-04-back-white',
+    name: 'T-SHIRT 04',
     image:
-      '/images/T_SHIRT_4A.webp',
+      '/images/T_SHIRT_4.jpg',
   },
-  {
-    id: 'sh-05-white',
-    name: 'T-SHIRT 05',
-    image:
-      '/images/T_SHIRT_5.webp',
-  },
-  {
-    id: 'sh-5a-white',
-    name: 'T-SHIRT 5A',
-    image:
-      '/images/T_SHIRT_5A.webp',
-  },
+  // {
+  //   id: 'sh-05-white',
+  //   name: 'T-SHIRT 05',
+  //   image:
+  //     '/images/T_SHIRT_5.webp',
+  // },
+  // {
+  //   id: 'sh-5a-white',
+  //   name: 'T-SHIRT 5A',
+  //   image:
+  //     '/images/T_SHIRT_5A.webp',
+  // },
   // {
   //   id: 'sh-11-white',
   //   name: 'T-SHIRT 11',
@@ -89,18 +89,18 @@ export const products: Product[] = [
   //   image:
   //     '/images/T_SHIRT_1.webp',
   // },
-  // {
-  //   id: 'hd-03-black',
-  //   name: 'CREWNECK 03',
-  //   image:
-  //     '/images/T_SHIRT_17.webp',
-  // },
-  // {
-  //   id: 'hd-04-black',
-  //   name: 'CREWNECK 04',
-  //   image:
-  //     '/images/T_SHIRT_19.webp',
-  // },
+  {
+    id: 'hd-01-black',
+    name: 'HOODIE 01',
+    image:
+      '/images/HOODIE_1.jpg',
+  },
+  {
+    id: 'hd-01a-black',
+    name: 'HOODIE 01A',
+    image:
+      '/images/HOODIE_1A.jpg',
+  },
   // {
   //   id: 'hd-05-black',
   //   name: 'CREWNECK 05',

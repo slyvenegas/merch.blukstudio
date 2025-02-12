@@ -31,7 +31,7 @@ export function Header({ isBackVisible, onBack }: HeaderProps) {
       </div>
 
       <div className="flex justify-center flex-1">
-        <img src="images/va-icon.png" alt="VAmerch" className="h-12" />
+        <a href="/"><img src="images/va-icon.png" alt="VAmerch" className="h-12" /></a>
       </div>
 
       <div className="flex items-center">
@@ -40,20 +40,12 @@ export function Header({ isBackVisible, onBack }: HeaderProps) {
           aria-label="Instagram"
           className="mr-4"
         >
-          <svg
-            className="w-6 h-6 text-gray-700"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M16 12a4 4 0 11-8 0 4 4 0 018 0zM12 6.75a5.25 5.25 0 100 10.5 5.25 5.25 0 000-10.5zM20.25 6.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
-            />
-          </svg>
+          <img
+            src="images/inst_header.svg"
+            alt="BlukStudio* Instagram"
+            className="w-auto h-6 "
+
+          />
         </a>
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}

@@ -132,7 +132,7 @@ export function MainMenu({ isBackVisible, onBack }: MainMenuProps) {
             exit={{ opacity: 0, x: -20 }}
           >
             <ul className="flex items-center space-x-2">
-              {['MERCH', 'PHOTOS'].map((item, index) => (
+              {['PHOTOS'].map((item, index) => (
                 <motion.li
                   key={item}
                   className={`bg-white px-3 py-1 rounded ${
