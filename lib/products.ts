@@ -96,7 +96,7 @@ export const products: Product[] = [
       '/images/HOODIE_1.jpg',
   },
   {
-    id: 'hd-01a-black',
+    id: 'hd-01-back-black',
     name: 'HOODIE 01A',
     image:
       '/images/HOODIE_1A.jpg',

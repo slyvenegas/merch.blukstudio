@@ -90,7 +90,7 @@ export function Cart({ isOpen, onClose }: { isOpen: boolean; onClose: any }) {
                 rel="noopener noreferrer"
                 className="w-full flex items-center justify-between bg-black text-white p-4 font-mono"
               >
-                PAGAR
+                ORDENA POR WHATSAPP!
                 <ChevronRight className="h-4 w-4" />
               </a>
             </div>

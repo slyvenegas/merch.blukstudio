@@ -24,14 +24,15 @@ export function Header({ isBackVisible, onBack }: HeaderProps) {
             src="images/bluk-logo-y.png"
             alt="Bluk* Logo-y"
             className="w-auto h-20 mb-2"
-
           />
         </a>
         <MainMenu isBackVisible={isBackVisible} onBack={onBack} />
       </div>
 
       <div className="flex justify-center flex-1">
-        <a href="/"><img src="images/va-icon.png" alt="VAmerch" className="h-12" /></a>
+        <a href="/">
+          <img src="images/va-icon.png" alt="VAmerch" className="h-12" />
+        </a>
       </div>
 
       <div className="flex items-center">
@@ -39,12 +40,13 @@ export function Header({ isBackVisible, onBack }: HeaderProps) {
           href="https://www.instagram.com/blukstudio/"
           aria-label="Instagram"
           className="mr-4"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           <img
             src="images/inst_header.svg"
             alt="BlukStudio* Instagram"
             className="w-auto h-6 "
-
           />
         </a>
         <button

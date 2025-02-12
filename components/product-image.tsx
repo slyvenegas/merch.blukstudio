@@ -27,6 +27,7 @@ export function ProductImage({
         maxHeight,
         aspectRatio: '1',
         overflow: 'hidden',
+        marginTop: '4%'
       }}
       layoutId={layoutId}
     >
