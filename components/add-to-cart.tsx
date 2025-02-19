@@ -27,11 +27,11 @@ export function AddToCart({ product }: { product: Product }) {
     [addToCart, product],
   );
 
-  const productName = product.id
-    .split('-')
-    .slice(0, -1)
-    .join('-')
-    .toUpperCase();
+  // const productName = product.id
+  //   .split('-')
+  //   .slice(0, -1)
+  //   .join('-')
+  //   .toUpperCase();
 
   return (
     <motion.div
@@ -54,7 +54,7 @@ export function AddToCart({ product }: { product: Product }) {
               selecting: { y: 0 },
             }}
           >
-            <motion.p
+            {/* <motion.p
               className="font-medium font-mono uppercase absolute inset-0 flex items-center justify-center"
               variants={{
                 idle: { y: 0 },
@@ -63,7 +63,7 @@ export function AddToCart({ product }: { product: Product }) {
               transition={{ type: 'tween', ease: 'easeInOut', duration: 0.2 }}
             >
               {productName}
-            </motion.p>
+            </motion.p> */}
             <motion.div
               className="flex items-center justify-between w-full absolute inset-0"
               variants={{
