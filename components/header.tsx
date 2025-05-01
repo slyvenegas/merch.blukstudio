@@ -37,7 +37,7 @@ export function Header({ isBackVisible, onBack }: HeaderProps) {
 
       <div className="flex items-center">
         <a
-          href="https://www.instagram.com/blukstudio/"
+          href="https://www.instagram.com/blukmerch/"
           aria-label="Instagram"
           className="mr-4"
           target="_blank"

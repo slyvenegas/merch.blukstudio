@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Product } from "@/lib/products";
 
 interface ProductImageProps {
@@ -8,6 +8,7 @@ interface ProductImageProps {
   maxHeight?: string;
   className?: string;
   layoutId?: string;
+  isFullView?: boolean;
 }
 
 export function ProductImage({
@@ -16,12 +17,37 @@ export function ProductImage({
   maxHeight = "none",
   className = "",
   layoutId,
+  isFullView = false,
 }: ProductImageProps) {
   const [zoom, setZoom] = useState({ x: 0, y: 0, active: false });
   const fullImageRef = useRef<HTMLDivElement>(null);
+  const [showFullImage, setShowFullImage] = useState(isFullView);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(false); // Estado para detectar si es escritorio
+
+  // Efecto para detectar si es escritorio
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 768); // Consideramos escritorio si el ancho es >= 768px
+    };
+
+    // Ejecutamos al montar el componente
+    handleResize();
+
+    // Escuchamos cambios en el tamaño de la ventana
+    window.addEventListener("resize", handleResize);
+
+    // Limpiamos el listener al desmontar
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Sincroniza showFullImage con isFullView
+  useEffect(() => {
+    setShowFullImage(isFullView);
+  }, [isFullView]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!product.fullImage || !fullImageRef.current) return; // Solo activa la lupa si existe fullImage
+    if (!product.fullImage || !fullImageRef.current || !isDesktop) return; // Solo aplica en escritorio
 
     const { left, top, width, height } = fullImageRef.current.getBoundingClientRect();
     const x = ((e.clientX - left) / width) * 100;
@@ -30,8 +56,25 @@ export function ProductImage({
     setZoom({ x, y, active: true });
   };
 
+  const handleMouseEnter = () => {
+    if (!isFullView) {
+      setShowFullImage(true);
+    }
+  };
+
   const handleMouseLeave = () => {
-    setZoom({ x: 0, y: 0, active: false });
+    if (!isFullView) {
+      setShowFullImage(false);
+      setZoom({ x: 0, y: 0, active: false });
+    }
+  };
+
+  const handleNextImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % product.fullImage.length);
+  };
+
+  const handlePrevImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + product.fullImage.length) % product.fullImage.length);
   };
 
   return (
@@ -47,7 +90,7 @@ export function ProductImage({
         marginTop: "4%",
       }}
     >
-      {/* Imagen miniatura (NO tiene efecto lupa) */}
+      {/* Miniatura (SIEMPRE visible) */}
       <Image
         src={product.image}
         alt={product.name}
@@ -57,53 +100,98 @@ export function ProductImage({
         loading="eager"
         decoding="sync"
         quality={100}
-        unoptimized={true}
+        unoptimized
       />
 
-      {/* Imagen fullImage (solo visible al hacer clic) */}
-      {product.fullImage && (
+      {/* fullImage aparece al hacer hover o en vista ampliada */}
+      {product.fullImage && showFullImage && (
         <div
           ref={fullImageRef}
-          onMouseMove={handleMouseMove}
+          onMouseMove={isDesktop ? handleMouseMove : undefined} // Solo aplica en escritorio
+          onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          className="absolute inset-0 bg-white flex items-center justify-center"
+          className="absolute inset-0 flex items-center justify-center bg-white"
           style={{
-            display: zoom.active ? "block" : "none",
             zIndex: 10,
           }}
         >
+          {/* Imagen actual */}
           <Image
-            src={product.fullImage}
+            src={product.fullImage[currentImageIndex]}
             alt={`${product.name} - Full Image`}
             width={500}
             height={500}
             className="object-contain"
+            priority
           />
-        </div>
-      )}
 
-      {/* Efecto lupa solo en `fullImage` */}
-      {zoom.active && product.fullImage && (
-        <div
-          className="zoom-lens"
-          style={{
-            position: "absolute",
-            width: "300px",
-            height: "300px",
-            borderRadius: "50%",
-            backgroundImage: `url(${product.fullImage})`,
-            backgroundSize: "1000%",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: `${zoom.x}% ${zoom.y}%`,
-            pointerEvents: "none",
-            transform: "translate(-50%, -50%)",
-            left: `${zoom.x}%`,
-            top: `${zoom.y}%`,
-            boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
-            border: "2px solid white",
-            clipPath: "circle(50%)",
-          }}
-        />
+          {/* Botones de navegación (solo si hay más de una imagen) */}
+          {product.fullImage.length > 1 && (
+            <>
+              <button
+                onClick={handlePrevImage}
+                style={{
+                  position: 'absolute',
+                  left: '10px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  zIndex: 30,
+                  backgroundColor: 'rgb(153 145 145 / 40%)',
+                  color: 'black',
+                  border: 'none',
+                  borderRadius: '50%',
+                  width: '24px',
+                  height: '24px',
+                  cursor: 'pointer',
+                }}
+              >
+                &lt;
+              </button>
+              <button
+                onClick={handleNextImage}
+                style={{
+                  position: 'absolute',
+                  right: '10px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  zIndex: 30,
+                  backgroundColor: 'rgb(153 145 145 / 40%)',
+                  color: 'black',
+                  border: 'none',
+                  borderRadius: '50%',
+                  width: '24px',
+                  height: '24px',
+                  cursor: 'pointer',
+                }}
+              >
+                &gt;
+              </button>
+            </>
+          )}
+
+          {/* Efecto lupa (solo en escritorio) */}
+          {zoom.active && isDesktop && (
+            <div
+              className="absolute pointer-events-none"
+              style={{
+                width: "200px",
+                height: "200px",
+                borderRadius: "50%",
+                backgroundImage: `url(${product.fullImage[currentImageIndex]})`,
+                backgroundSize: "600%",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: `${zoom.x}% ${zoom.y}%`,
+                transform: "translate(-50%, -50%)",
+                left: `${zoom.x}%`,
+                top: `${zoom.y}%`,
+                boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
+                border: "1px solid transparent",
+                clipPath: "circle(60%)",
+                zIndex: 20,
+              }}
+            />
+          )}
+        </div>
       )}
     </div>
   );

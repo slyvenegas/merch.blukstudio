@@ -106,14 +106,12 @@ export default function Page() {
             >
               <div className="w-full max-w-4xl mx-auto flex-grow flex flex-col items-center justify-center p-4">
                 <ProductImage
-                  product={{
-                    ...selectedProduct,
-                    image: selectedProduct.fullImage || selectedProduct.image, // Usa la imagen completa si existe
-                  }}
+                  product={selectedProduct}
                   maxWidth="100%"
                   maxHeight="calc(100vh - 250px - env(safe-area-inset-top) - env(safe-area-inset-bottom))"
                   className="w-full"
                   layoutId={`product-image-${selectedProduct.id}`}
+                  isFullView={true} // Indica que está en vista ampliada
                 />
               </div>
 
