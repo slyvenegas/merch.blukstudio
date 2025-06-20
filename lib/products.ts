@@ -69,6 +69,13 @@ export const products: Product[] = [
       '/images/CAP_1.jpg',
     fullImage: ['/images/CAP_1.jpg', '/images/CAP_1A.jpg', '/images/CAP_1B.jpg'],
   },
+  {
+    id: 'sh-06-white',
+    name: 'T-SHIRT 04',
+    image:
+      '/images/T_SHIRT_7.jpeg',
+    fullImage: ['T_SHIRT_7.jpeg', '/images/T_SHIRT_7A.jpeg', '/images/T_SHIRT_7B.jpeg'],
+  }
 
 
   
