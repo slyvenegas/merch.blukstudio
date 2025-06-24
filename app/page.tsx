@@ -7,9 +7,13 @@ import { Header } from "@/components/header";
 import { AddToCart } from "@/components/add-to-cart";
 import { ProductImage } from "@/components/product-image";
 
+type ZoomLevel = "small" | "normal" | "large";
+
 export default function Page() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [_, startTransition] = useTransition();
+  const [zoomLevel, setZoomLevel] = useState<ZoomLevel>("normal");
+  const [isDesktop, setIsDesktop] = useState<boolean>(false);
 
   const handleProductClick = (product: Product) => {
     startTransition(() => {
@@ -27,17 +31,22 @@ export default function Page() {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (selectedProduct) {
-        if (event.key === "Escape") {
-          handleBack();
-        }
+      if (selectedProduct && event.key === "Escape") {
+        handleBack();
       }
     };
 
+    const checkScreenSize = () => {
+      setIsDesktop(window.innerWidth >= 768); // md: breakpoint
+    };
+
     window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("resize", checkScreenSize);
+    checkScreenSize(); // initial check
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("resize", checkScreenSize);
     };
   }, [selectedProduct, handleBack]);
 
@@ -46,49 +55,82 @@ export default function Page() {
       const productId = window.location.pathname.split("/").pop();
       if (productId && productId !== "") {
         const product = products.find((p) => p.id === productId);
-        if (product) {
-          setSelectedProduct(product);
-        } else {
-          setSelectedProduct(null);
-        }
+        setSelectedProduct(product || null);
       } else {
         setSelectedProduct(null);
       }
     };
 
     window.addEventListener("popstate", handlePopState);
-
-    return () => {
-      window.removeEventListener("popstate", handlePopState);
-    };
+    return () => window.removeEventListener("popstate", handlePopState);
   }, []);
+
+  const getNextZoomLevel = (current: ZoomLevel): ZoomLevel => {
+    switch (current) {
+      case "normal":
+        return "large";
+      case "large":
+        return "small";
+      case "small":
+        return "normal";
+    }
+  };
+
+  const gridMinWidth = {
+    small: "190px",
+    normal: "260px",
+    large: "360px",
+  }[zoomLevel];
+
+  const zoomLabel = {
+    small: ".",
+    normal: "..",
+    large: "...",
+  }[zoomLevel];
 
   return (
     <div className="flex flex-col min-h-screen mt-12">
       <Header isBackVisible={!!selectedProduct} onBack={handleBack} />
+
       <main className="flex-grow relative pt-12">
+        {/* Zoom Button only on desktop */}
+        {isDesktop && (
+          <button
+            onClick={() => setZoomLevel(getNextZoomLevel(zoomLevel))}
+            className="hidden md:block fixed bottom-4 right-4 z-50 px-4 py-2 bg-black text-white rounded-full shadow-lg"
+          >
+            {zoomLabel}
+          </button>
+        )}
+
+        {/* Product Grid */}
         <motion.div
-          className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-5 gap-y-12 pb-8"
+          className={`pb-8 grid gap-6 transition-opacity duration-300 grid-cols-2 sm:grid-cols-3`}
+          style={
+            isDesktop
+              ? {
+                  gridTemplateColumns: `repeat(auto-fit, minmax(${gridMinWidth}, 1fr))`,
+                }
+              : undefined
+          }
           animate={{ opacity: selectedProduct ? 0 : 1 }}
-          transition={{ duration: 0.3 }}
         >
           {products.map((product) => (
             <div
               key={product.id}
-              className="group cursor-pointer"
+              className="group cursor-pointer w-full transition-all duration-300"
               onClick={() => handleProductClick(product)}
             >
               <ProductImage
                 product={product}
                 layoutId={`product-image-${product.id}`}
+                className="w-full"
               />
-              {/* <p className="font-medium text-center font-mono uppercase">
-                {product.id.split("-").slice(0, -1).join("-")}
-              </p> */}
             </div>
           ))}
         </motion.div>
 
+        {/* Product Detail View */}
         <AnimatePresence>
           {selectedProduct && (
             <motion.div
@@ -111,7 +153,7 @@ export default function Page() {
                   maxHeight="calc(100vh - 250px - env(safe-area-inset-top) - env(safe-area-inset-bottom))"
                   className="w-full"
                   layoutId={`product-image-${selectedProduct.id}`}
-                  isFullView={true} // Indica que está en vista ampliada
+                  isFullView={true}
                 />
               </div>
 
