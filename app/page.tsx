@@ -1,7 +1,17 @@
 "use client";
 
-import { useState, useEffect, useCallback, useTransition } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import {
+  useState,
+  useEffect,
+  useCallback,
+  useTransition,
+} from "react";
+import {
+  motion,
+  AnimatePresence,
+  LayoutGroup,
+  MotionConfig,
+} from "framer-motion";
 import { products, Product } from "@/lib/products";
 import { Header } from "@/components/header";
 import { AddToCart } from "@/components/add-to-cart";
@@ -37,12 +47,12 @@ export default function Page() {
     };
 
     const checkScreenSize = () => {
-      setIsDesktop(window.innerWidth >= 768); // md: breakpoint
+      setIsDesktop(window.innerWidth >= 768);
     };
 
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("resize", checkScreenSize);
-    checkScreenSize(); // initial check
+    checkScreenSize();
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
@@ -89,86 +99,107 @@ export default function Page() {
   }[zoomLevel];
 
   return (
-    <div className="flex flex-col min-h-screen mt-12">
-      <Header isBackVisible={!!selectedProduct} onBack={handleBack} />
+    <MotionConfig
+      transition={{
+        type: "spring",
+        stiffness: 120,
+        damping: 20,
+      }}
+    >
+      <LayoutGroup>
+        <div className="flex flex-col min-h-screen mt-12">
+          <Header isBackVisible={!!selectedProduct} onBack={handleBack} />
 
-      <main className="flex-grow relative pt-12">
-        {/* Zoom Button only on desktop */}
-        {isDesktop && (
-          <button
-            onClick={() => setZoomLevel(getNextZoomLevel(zoomLevel))}
-            className="hidden md:block fixed bottom-4 right-4 z-50 px-4 py-2 bg-black text-white rounded-full shadow-lg"
-          >
-            {zoomLabel}
-          </button>
-        )}
+          <main className="flex-grow relative pt-12">
+            {/* Zoom Button */}
+            {isDesktop && (
+              <button
+                onClick={() => setZoomLevel(getNextZoomLevel(zoomLevel))}
+                className="hidden md:block fixed bottom-4 right-4 z-50 px-4 py-2 bg-black text-white rounded-full shadow-lg"
+              >
+                {zoomLabel}
+              </button>
+            )}
 
-        {/* Product Grid */}
-        <motion.div
-          className={`pb-8 grid gap-6 transition-opacity duration- grid-cols-2 sm:grid-cols-3`}
-          style={
-            isDesktop
-              ? {
-                  gridTemplateColumns: `repeat(auto-fit, minmax(${gridMinWidth}, 1fr))`,
-                }
-              : undefined
-          }
-          animate={{ opacity: selectedProduct ? 0 : 1 }}
-        >
-          {products.map((product) => (
-            <div
-              key={product.id}
-              className="group cursor-pointer w-full transition-all duration-300"
-              onClick={() => handleProductClick(product)}
-            >
-              <ProductImage
-                product={product}
-                layoutId={`product-image-${product.id}`}
-                className="w-full"
-              />
-            </div>
-          ))}
-        </motion.div>
-
-        {/* Product Detail View */}
-        <AnimatePresence>
-          {selectedProduct && (
+            {/* Product Grid */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 flex flex-col items-center justify-between bg-white bg-opacity-90"
+              layout
+              className="pb-8 grid gap-6"
               style={{
-                top: "0",
-                height:
-                  "calc(100vh - 80px - env(safe-area-inset-top) - env(safe-area-inset-bottom))",
-                paddingTop: "calc(20px + env(safe-area-inset-top))",
-                paddingBottom: "0",
+                gridTemplateColumns: isDesktop
+                  ? `repeat(auto-fit, minmax(${gridMinWidth}, 1fr))`
+                  : undefined,
+              }}
+              animate={{
+                opacity: selectedProduct ? 0 : 1,
+              }}
+              transition={{
+                opacity: { duration: 0.3 },
               }}
             >
-              <div className="w-full max-w-4xl mx-auto flex-grow flex flex-col items-center justify-center p-4">
-                <ProductImage
-                  product={selectedProduct}
-                  maxWidth="100%"
-                  maxHeight="calc(100vh - 250px - env(safe-area-inset-top) - env(safe-area-inset-bottom))"
-                  className="w-full"
-                  layoutId={`product-image-${selectedProduct.id}`}
-                  isFullView={true}
-                />
-              </div>
-
-              <motion.div
-                className="w-full max-w-md mx-auto p-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.3 }}
-              >
-                <AddToCart product={selectedProduct} />
-              </motion.div>
+              {products.map((product, i) => (
+                <motion.div
+                  key={product.id}
+                  layoutId={`product-card-${product.id}`}
+                  layout
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.04 }}
+                  whileHover={{ scale: 1.03 }}
+                  className="group cursor-pointer w-full"
+                  onClick={() => handleProductClick(product)}
+                >
+                  <ProductImage
+                    product={product}
+                    layoutId={`product-image-${product.id}`}
+                    className="w-full"
+                  />
+                </motion.div>
+              ))}
             </motion.div>
-          )}
-        </AnimatePresence>
-      </main>
-    </div>
+
+            {/* Product Detail View */}
+            <AnimatePresence>
+              {selectedProduct && (
+                <motion.div
+                  layoutId={`product-card-${selectedProduct.id}`}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="fixed inset-0 flex flex-col items-center justify-between bg-white bg-opacity-90 z-50"
+                  style={{
+                    top: "0",
+                    height:
+                      "calc(100vh - 80px - env(safe-area-inset-top) - env(safe-area-inset-bottom))",
+                    paddingTop: "calc(20px + env(safe-area-inset-top))",
+                    paddingBottom: "0",
+                  }}
+                >
+                  <div className="w-full max-w-4xl mx-auto flex-grow flex flex-col items-center justify-center p-4">
+                    <ProductImage
+                      product={selectedProduct}
+                      maxWidth="100%"
+                      maxHeight="calc(100vh - 250px - env(safe-area-inset-top) - env(safe-area-inset-bottom))"
+                      className="w-full"
+                      layoutId={`product-image-${selectedProduct.id}`}
+                      isFullView={true}
+                    />
+                  </div>
+
+                  <motion.div
+                    className="w-full max-w-md mx-auto p-4"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: 0.3 }}
+                  >
+                    <AddToCart product={selectedProduct} />
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </main>
+        </div>
+      </LayoutGroup>
+    </MotionConfig>
   );
 }
