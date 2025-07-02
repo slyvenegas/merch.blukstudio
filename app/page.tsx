@@ -79,7 +79,7 @@ export default function Page() {
   const gridMinWidth = {
     small: "190px",
     normal: "260px",
-    large: "360px",
+    large: "460px",
   }[zoomLevel];
 
   const zoomLabel = {
@@ -105,7 +105,7 @@ export default function Page() {
 
         {/* Product Grid */}
         <motion.div
-          className={`pb-8 grid gap-6 transition-opacity duration-300 grid-cols-2 sm:grid-cols-3`}
+          className={`pb-8 grid gap-6 transition-opacity duration- grid-cols-2 sm:grid-cols-3`}
           style={
             isDesktop
               ? {
