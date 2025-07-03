@@ -59,13 +59,17 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   );
 
   const total = items.reduce((acc, item) => {
-    const price = item.id.startsWith('hd')
-      ? item.id.includes('black')
-        ? 210000
-        : 150000
+  const price = item.id.includes('premium')
+    ? 350000
+    : item.id.startsWith('goldpants')
+      ? item.id.includes('tote')
+      ? 60000
+      : 250000
       : 150000;
-    return acc + price * item.quantity;
-  }, 0);
+
+  return acc + price;
+}, 0);
+
 
   return (
     <CartContext.Provider value={{ items, addToCart, updateQuantity, total }}>

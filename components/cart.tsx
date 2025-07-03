@@ -37,10 +37,12 @@ export function Cart({ isOpen, onClose }: { isOpen: boolean; onClose: any }) {
                     </p>
                     <p className="font-mono">
                       $
-                      {item.id.startsWith("hd")
-                        ? item.id.includes("black")
-                          ? "210000"
-                          : "150000"
+                      {item.id.includes("premium")
+                        ? "350000"
+                        : item.id.startsWith("goldpants")
+                        ? item.id.includes("tote")
+                          ? "60000"
+                          : "250000"
                         : "150000"}
                     </p>
                   </div>
