@@ -125,11 +125,13 @@ export default function Page() {
             <motion.div
               layout
               className="pb-8 grid gap-6"
-              style={{
-                gridTemplateColumns: isDesktop
-                  ? `repeat(auto-fit, minmax(${gridMinWidth}, 1fr))`
-                  : undefined,
-              }}
+              style={
+                {
+                  ...(isDesktop && {
+                    gridTemplateColumns: `repeat(auto-fit, minmax(${gridMinWidth}, 1fr))`,
+                  }),
+                } as React.CSSProperties
+              }
               animate={{
                 opacity: selectedProduct ? 0 : 1,
               }}
