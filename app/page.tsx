@@ -1,21 +1,17 @@
 "use client";
 
+import { useState, useEffect, useCallback, useTransition } from "react";
 import {
-  useState,
-  useEffect,
-  useCallback,
-  useTransition,
-} from "react";
-import {
-  motion,
   AnimatePresence,
   LayoutGroup,
   MotionConfig,
+  motion,
 } from "framer-motion";
 import { products, Product } from "@/lib/products";
 import { Header } from "@/components/header";
 import { AddToCart } from "@/components/add-to-cart";
 import { ProductImage } from "@/components/product-image";
+import { MotionDiv } from "@/app/motion-div";
 
 type ZoomLevel = "small" | "normal" | "large";
 
@@ -122,15 +118,15 @@ export default function Page() {
             )}
 
             {/* Product Grid */}
-            <motion.div
+            <MotionDiv
               layout
               className="pb-8 grid gap-6"
               style={
-                {
-                  ...(isDesktop && {
-                    gridTemplateColumns: `repeat(auto-fit, minmax(${gridMinWidth}, 1fr))`,
-                  }),
-                } as React.CSSProperties
+                isDesktop
+                  ? {
+                      gridTemplateColumns: `repeat(auto-fit, minmax(${gridMinWidth}, 1fr))`,
+                    }
+                  : undefined
               }
               animate={{
                 opacity: selectedProduct ? 0 : 1,
@@ -140,7 +136,7 @@ export default function Page() {
               }}
             >
               {products.map((product, i) => (
-                <motion.div
+                <MotionDiv
                   key={product.id}
                   layoutId={`product-card-${product.id}`}
                   layout
@@ -156,14 +152,14 @@ export default function Page() {
                     layoutId={`product-image-${product.id}`}
                     className="w-full"
                   />
-                </motion.div>
+                </MotionDiv>
               ))}
-            </motion.div>
+            </MotionDiv>
 
             {/* Product Detail View */}
             <AnimatePresence>
               {selectedProduct && (
-                <motion.div
+                <MotionDiv
                   layoutId={`product-card-${selectedProduct.id}`}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -188,15 +184,15 @@ export default function Page() {
                     />
                   </div>
 
-                  <motion.div
+                  <MotionDiv
                     className="w-full max-w-md mx-auto p-4"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, delay: 0.3 }}
                   >
                     <AddToCart product={selectedProduct} />
-                  </motion.div>
-                </motion.div>
+                  </MotionDiv>
+                </MotionDiv>
               )}
             </AnimatePresence>
           </main>
