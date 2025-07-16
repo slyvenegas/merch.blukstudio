@@ -14,6 +14,20 @@ export const products: Product[] = [
     fullImage: ['https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751479901/HOODIE_RED01_b47cqn.jpg', 'https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751479899/HOODIE_RED03_qaaxuf.jpg','https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751479902/HOODIE_RED02_z816zo.jpg'],
   },
   {
+    id: 'sh-10-black',
+    name: 'T-SHIRT 10',
+    image:
+    'https://res.cloudinary.com/ddqgjf5wr/image/upload/v1752626054/LOOSE_FIT_01_ymvbmw.jpg',
+    fullImage: ['https://res.cloudinary.com/ddqgjf5wr/image/upload/v1752626054/LOOSE_FIT_01_ymvbmw.jpg', 'https://res.cloudinary.com/ddqgjf5wr/image/upload/v1752626055/LOOSE_FIT_02_cha0yf.jpg', 'https://res.cloudinary.com/ddqgjf5wr/image/upload/v1752626054/LOOSE_FIT_03_l04jvd.jpg', 'https://res.cloudinary.com/ddqgjf5wr/image/upload/v1752626055/LOOSE_FIT_04_pqf8bn.jpg'],
+  },
+  {
+    id: 'sh-11-black',
+    name: 'T-SHIRT 11',
+    image:
+    'https://res.cloudinary.com/ddqgjf5wr/image/upload/v1752626054/OVERSIZED_FIT_black_0_jqz2kk.jpg',
+    fullImage: ['https://res.cloudinary.com/ddqgjf5wr/image/upload/v1752626054/OVERSIZED_FIT_black_0_jqz2kk.jpg', 'https://res.cloudinary.com/ddqgjf5wr/image/upload/v1752626055/OVERSIZED_FIT_black_02_oiryhs.jpg'],
+  },
+  {
     id: 'hd-07-black',
     name: 'T-SHIRT 07',
     image:
@@ -24,8 +38,8 @@ export const products: Product[] = [
     id: 'hd-09-black',
     name: 'T-SHIRT 09',
     image:
-    'https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751481156/Camiseta_Loose_Fit_Negro01_evloqc.jpg',
-    fullImage: ['https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751481156/Camiseta_Loose_Fit_Negro01_evloqc.jpg', 'https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751481156/Camiseta_Loose_Fit_Negro03_tctmnh.jpg','https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751481157/Camiseta_Loose_Fit_Negro02_bkk2rb.jpg'],
+    'https://res.cloudinary.com/ddqgjf5wr/image/upload/v1752626054/OVERSIZED_FIT_black_0_jqz2kk.jpg',
+    fullImage: ['https://res.cloudinary.com/ddqgjf5wr/image/upload/v1752626054/OVERSIZED_FIT_black_0_jqz2kk.jpg', 'https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751481156/Camiseta_Loose_Fit_Negro03_tctmnh.jpg','https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751481157/Camiseta_Loose_Fit_Negro02_bkk2rb.jpg'],
   },
   {
     id: 'goldpants-03-black',
