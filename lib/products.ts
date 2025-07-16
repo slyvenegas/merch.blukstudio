@@ -38,8 +38,8 @@ export const products: Product[] = [
     id: 'hd-09-black',
     name: 'T-SHIRT 09',
     image:
-    'https://res.cloudinary.com/ddqgjf5wr/image/upload/v1752626054/OVERSIZED_FIT_black_0_jqz2kk.jpg',
-    fullImage: ['https://res.cloudinary.com/ddqgjf5wr/image/upload/v1752626054/OVERSIZED_FIT_black_0_jqz2kk.jpg', 'https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751481156/Camiseta_Loose_Fit_Negro03_tctmnh.jpg','https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751481157/Camiseta_Loose_Fit_Negro02_bkk2rb.jpg'],
+    'https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751481156/Camiseta_Loose_Fit_Negro01_evloqc.jpg',
+    fullImage: ['https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751481156/Camiseta_Loose_Fit_Negro01_evloqc.jpg', 'https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751481156/Camiseta_Loose_Fit_Negro03_tctmnh.jpg','https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751481157/Camiseta_Loose_Fit_Negro02_bkk2rb.jpg'],
   },
   {
     id: 'goldpants-03-black',
@@ -74,7 +74,7 @@ export const products: Product[] = [
     name: 'CAP 01',
     image:
     'https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751483125/CAP_02_e2ck9b.jpg',
-    fullImage: ['https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751483125/CAP_02_e2ck9b.jpg'],
+    fullImage: ['https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751483125/CAP_02_e2ck9b.jpg','https://res.cloudinary.com/ddqgjf5wr/image/upload/v1750800883/CAP_1B_jo3smu.jpg','https://res.cloudinary.com/ddqgjf5wr/image/upload/v1750800882/CAP_1A_lvtpfb.jpg'],
   },
   // {
   //   id: 'sh-06-black',
