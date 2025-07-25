@@ -49,7 +49,8 @@ export function ProductImage({
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!product.fullImage || !fullImageRef.current || !isDesktop) return; // Solo aplica en escritorio
 
-    const { left, top, width, height } = fullImageRef.current.getBoundingClientRect();
+    const { left, top, width, height } =
+      fullImageRef.current.getBoundingClientRect();
     const x = ((e.clientX - left) / width) * 100;
     const y = ((e.clientY - top) / height) * 100;
 
@@ -70,11 +71,16 @@ export function ProductImage({
   };
 
   const handleNextImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % product.fullImage.length);
+    setCurrentImageIndex(
+      (prevIndex) => (prevIndex + 1) % product.fullImage.length
+    );
   };
 
   const handlePrevImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + product.fullImage.length) % product.fullImage.length);
+    setCurrentImageIndex(
+      (prevIndex) =>
+        (prevIndex - 1 + product.fullImage.length) % product.fullImage.length
+    );
   };
 
   return (
@@ -88,6 +94,7 @@ export function ProductImage({
         overflow: "hidden",
         position: "relative",
         marginTop: "4%",
+        height: "100%", // <--- NUEVO: permite adaptarse al grid
       }}
     >
       {/* Miniatura (SIEMPRE visible) */}
@@ -131,18 +138,18 @@ export function ProductImage({
               <button
                 onClick={handlePrevImage}
                 style={{
-                  position: 'absolute',
-                  left: '10px',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
+                  position: "absolute",
+                  left: "10px",
+                  top: "50%",
+                  transform: "translateY(-50%)",
                   zIndex: 30,
-                  backgroundColor: 'rgb(153 145 145 / 40%)',
-                  color: 'black',
-                  border: 'none',
-                  borderRadius: '50%',
-                  width: '24px',
-                  height: '24px',
-                  cursor: 'pointer',
+                  backgroundColor: "rgb(153 145 145 / 40%)",
+                  color: "black",
+                  border: "none",
+                  borderRadius: "50%",
+                  width: "24px",
+                  height: "24px",
+                  cursor: "pointer",
                 }}
               >
                 &lt;
@@ -150,18 +157,18 @@ export function ProductImage({
               <button
                 onClick={handleNextImage}
                 style={{
-                  position: 'absolute',
-                  right: '10px',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
+                  position: "absolute",
+                  right: "10px",
+                  top: "50%",
+                  transform: "translateY(-50%)",
                   zIndex: 30,
-                  backgroundColor: 'rgb(153 145 145 / 40%)',
-                  color: 'black',
-                  border: 'none',
-                  borderRadius: '50%',
-                  width: '24px',
-                  height: '24px',
-                  cursor: 'pointer',
+                  backgroundColor: "rgb(153 145 145 / 40%)",
+                  color: "black",
+                  border: "none",
+                  borderRadius: "50%",
+                  width: "24px",
+                  height: "24px",
+                  cursor: "pointer",
                 }}
               >
                 &gt;

@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${GeistMono.className}`}>
         <CartProvider>
-          <div className="flex flex-col min-h-screen h-screen mx-5 overflow-y-scroll">
+          <div className="flex flex-col min-h-screen h-screen px-4 sm:px-6 md:px-8 overflow-y-scroll">
             {children}
           </div>
         </CartProvider>
@@ -29,3 +29,4 @@ export default function RootLayout({
     </html>
   );
 }
+

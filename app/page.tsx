@@ -5,7 +5,6 @@ import {
   AnimatePresence,
   LayoutGroup,
   MotionConfig,
-  motion,
 } from "framer-motion";
 import { products, Product } from "@/lib/products";
 import { Header } from "@/components/header";
@@ -83,9 +82,9 @@ export default function Page() {
   };
 
   const gridMinWidth = {
-    small: "190px",
-    normal: "260px",
-    large: "460px",
+    small: "80px",
+    normal: "100px",
+    large: "200px",
   }[zoomLevel];
 
   const zoomLabel = {
@@ -107,7 +106,6 @@ export default function Page() {
           <Header isBackVisible={!!selectedProduct} onBack={handleBack} />
 
           <main className="flex-grow relative pt-12">
-            {/* Zoom Button */}
             {isDesktop && (
               <button
                 onClick={() => setZoomLevel(getNextZoomLevel(zoomLevel))}
@@ -117,17 +115,12 @@ export default function Page() {
               </button>
             )}
 
-            {/* Product Grid */}
             <MotionDiv
               layout
-              className="pb-8 grid gap-6"
-              style={
-                isDesktop
-                  ? {
-                      gridTemplateColumns: `repeat(auto-fit, minmax(${gridMinWidth}, 1fr))`,
-                    }
-                  : undefined
-              }
+              className="pb-8 grid gap-3"
+              style={{
+                gridTemplateColumns: `repeat(auto-fit, minmax(${gridMinWidth}, 1fr))`,
+              }}
               animate={{
                 opacity: selectedProduct ? 0 : 1,
               }}
@@ -144,19 +137,20 @@ export default function Page() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.04 }}
                   whileHover={{ scale: 1.03 }}
-                  className="group cursor-pointer w-full"
+                  className="group cursor-pointer"
                   onClick={() => handleProductClick(product)}
                 >
                   <ProductImage
                     product={product}
+                    maxWidth="100%"
+                    maxHeight="100%"
+                    className="w-full h-full"
                     layoutId={`product-image-${product.id}`}
-                    className="w-full"
                   />
                 </MotionDiv>
               ))}
             </MotionDiv>
 
-            {/* Product Detail View */}
             <AnimatePresence>
               {selectedProduct && (
                 <MotionDiv
