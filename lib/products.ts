@@ -38,21 +38,21 @@ export const products: Product[] = [
     id: 'hd-09-black',
     name: 'T-SHIRT 09',
     image:
-    'https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751481156/Camiseta_Loose_Fit_Negro01_evloqc.jpg',
+    'https://res.cloudinary.com/ddqgjf5wr/image/upload/v1757639741/SOLD_OUT_02_wvyfcw.jpg',
     fullImage: ['https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751481156/Camiseta_Loose_Fit_Negro01_evloqc.jpg', 'https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751481156/Camiseta_Loose_Fit_Negro03_tctmnh.jpg','https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751481157/Camiseta_Loose_Fit_Negro02_bkk2rb.jpg'],
   },
   {
     id: 'goldpants-03-black',
     name: 'HOODIE 03',
     image:
-    'https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751481579/pants_linn01_l1xpfb.jpg',
+    'https://res.cloudinary.com/ddqgjf5wr/image/upload/v1757639741/SOLD_OUT_03_ok5pc2.jpg',
     fullImage: ['https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751481579/pants_linn01_l1xpfb.jpg', 'https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751481581/pants_linn02_bvn7c9.jpg', 'https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751481582/pants_linn03_uzxlze.jpg', 'https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751481581/pants_linn04_s3rlsc.jpg','https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751481581/pants_linn05_ct3rb0.jpg'],
   },
   {
     id: 'hd-04-black',
     name: 'HOODIE 04',
     image:
-    'https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751482008/pants_WAHADS01_an3swp.jpg',
+    'https://res.cloudinary.com/ddqgjf5wr/image/upload/v1757639741/SOLD_OUT_01_am83ry.jpg',
     fullImage: ['https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751482008/pants_WAHADS01_an3swp.jpg', 'https://res.cloudinary.com/ddqgjf5wr/image/upload/v1751482009/pants_WAHADS02_lwziza.jpg'],
   },
   {

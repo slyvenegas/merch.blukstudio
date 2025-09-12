@@ -42,7 +42,9 @@ export default function Page() {
     };
 
     const checkScreenSize = () => {
-      setIsDesktop(window.innerWidth >= 768);
+      const desktop = window.innerWidth >= 768;
+      setIsDesktop(desktop);
+      setZoomLevel(desktop ? "normal" : "small"); // 👈 ajuste aquí
     };
 
     window.addEventListener("keydown", handleKeyDown);
@@ -83,8 +85,8 @@ export default function Page() {
 
   const gridMinWidth = {
     small: "80px",
-    normal: "100px",
-    large: "200px",
+    normal: "200px",
+    large: "300px",
   }[zoomLevel];
 
   const zoomLabel = {
