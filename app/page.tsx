@@ -104,93 +104,16 @@ export default function Page() {
       }}
     >
       <LayoutGroup>
-        <div className="flex flex-col min-h-screen mt-12">
+        <div className="flex flex-col min-h-screen bg-white">
           <Header isBackVisible={!!selectedProduct} onBack={handleBack} />
 
-          <main className="flex-grow relative pt-12">
-            {isDesktop && (
-              <button
-                onClick={() => setZoomLevel(getNextZoomLevel(zoomLevel))}
-                className="hidden md:block fixed bottom-4 right-4 z-50 px-4 py-2 bg-black text-white rounded-full shadow-lg"
-              >
-                {zoomLabel}
-              </button>
-            )}
-
-            <MotionDiv
-              layout
-              className="pb-8 grid gap-3"
-              style={{
-                gridTemplateColumns: `repeat(auto-fit, minmax(${gridMinWidth}, 1fr))`,
-              }}
-              animate={{
-                opacity: selectedProduct ? 0 : 1,
-              }}
-              transition={{
-                opacity: { duration: 0.3 },
-              }}
-            >
-              {products.map((product, i) => (
-                <MotionDiv
-                  key={product.id}
-                  layoutId={`product-card-${product.id}`}
-                  layout
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.04 }}
-                  whileHover={{ scale: 1.03 }}
-                  className="group cursor-pointer"
-                  onClick={() => handleProductClick(product)}
-                >
-                  <ProductImage
-                    product={product}
-                    maxWidth="100%"
-                    maxHeight="100%"
-                    className="w-full h-full"
-                    layoutId={`product-image-${product.id}`}
-                  />
-                </MotionDiv>
-              ))}
-            </MotionDiv>
-
-            <AnimatePresence>
-              {selectedProduct && (
-                <MotionDiv
-                  layoutId={`product-card-${selectedProduct.id}`}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="fixed inset-0 flex flex-col items-center justify-between bg-white bg-opacity-90 z-50"
-                  style={{
-                    top: "0",
-                    height:
-                      "calc(100vh - 80px - env(safe-area-inset-top) - env(safe-area-inset-bottom))",
-                    paddingTop: "calc(20px + env(safe-area-inset-top))",
-                    paddingBottom: "0",
-                  }}
-                >
-                  <div className="w-full max-w-4xl mx-auto flex-grow flex flex-col items-center justify-center p-4">
-                    <ProductImage
-                      product={selectedProduct}
-                      maxWidth="100%"
-                      maxHeight="calc(100vh - 250px - env(safe-area-inset-top) - env(safe-area-inset-bottom))"
-                      className="w-full"
-                      layoutId={`product-image-${selectedProduct.id}`}
-                      isFullView={true}
-                    />
-                  </div>
-
-                  <MotionDiv
-                    className="w-full max-w-md mx-auto p-4"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: 0.3 }}
-                  >
-                    <AddToCart product={selectedProduct} />
-                  </MotionDiv>
-                </MotionDiv>
-              )}
-            </AnimatePresence>
+          <main className="flex-grow flex items-center justify-center p-4">
+            {/* Solo se modificó este contenido dentro de <main> */}
+            <img
+              src="images/mantenimiento_2027.png"
+              alt="Sitio en mantenimiento"
+              className="max-w-full max-h-[80vh] object-contain"
+            />
           </main>
         </div>
       </LayoutGroup>
